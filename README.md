@@ -6,7 +6,7 @@ In the project directory, you can run:
 
 ### `yarn dicey`
 
-Two options will be available (always run [1] them in order to have website run):<br />
+Two options will be available (always run them in order):<br /><br />
 [1] initialize project<br />
 [2] start packager
 
