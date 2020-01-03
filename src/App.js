@@ -10,34 +10,20 @@
 import React, { PureComponent } from 'react';
 
 // import third part libraries
-import _ from 'lodash';
 import { Button, } from 'react-bootstrap';
 import { Fireworks, } from 'fireworks/lib/react';
 import { MdHelpOutline, } from 'react-icons/md';
-import ReactDice from 'react-dice-complete';
 
 // import utils
 import logic from './utils';
 
 // import components
 import { Counter, } from './components/Counter';
+import { Dicey, } from './components/Dicey';
 import { DiceyModal, } from './components/custom';
 
 // css import files
-import 'react-dice-complete/dist/react-dice-complete.css';
 import './App.css';
-
-// setup constants
-const WINNING_ROLL_NUMBER = 5;
-const NUMBERS_TO_WORDS = [
-    '',
-    'one',
-    'two',
-    'three',
-    'four',
-    'five',
-    'six',
-];
 
 class App extends PureComponent {
     constructor(props) {
@@ -67,13 +53,12 @@ class App extends PureComponent {
     _resetGame = () => this.setState(this.defaultState)
 
     _rollDone = num => {
-        let newCountsState = _.cloneDeep(this.state.counts);
-        let newCount = (newCountsState[NUMBERS_TO_WORDS[num]] + 1);
-        newCountsState = _.update(newCountsState, NUMBERS_TO_WORDS[num], () => newCount);
+        const { counts, } = this.state;
+        const { newCount, newCountsState, } = logic.handleRollDoneLogic(num, counts);
         this.setState({
             counts:        newCountsState,
             isRolling:     false,
-            winningNumber: newCount === WINNING_ROLL_NUMBER ? num : null,
+            winningNumber: newCount === logic.returnWinningRollNumber() ? num : null,
         });
     }
 
@@ -92,22 +77,11 @@ class App extends PureComponent {
                     />
                 </div>
                 <div className={'row padding-vert-20'}>
-                    <div className={'center-content dice-container'}>
-                        <div onClick={isRolling ? () => null : () => this.setState({ isRolling: true, }, () => this._reactDice.rollAll())}>
-                            <ReactDice
-                                disableIndividual={true} // {Bool} false disable clicks on die to roll each individually
-                                dieSize={75}
-                                dotColor={'#FFFFFF'} // {String} #1eff00 hex color code for the dots on the die
-                                faceColor={'#000000'} // {String} #ff00ac hex color code for the face of the die
-                                margin={0} // {Number} 15 margin between each die
-                                numDice={1} // {Number} 4 The number of dice you wish to have
-                                outline={true} // {Bool} false Show a 1px outline for each face of the die
-                                outlineColor={'#000000'} // {String} #000000 hex color code for outline color if outline is true
-                                ref={dice => this._reactDice = dice}
-                                rollDone={this._rollDone} // {String/Function} null callback returns total & individual values from dice roll
-                            />
-                        </div>
-                    </div>
+                    <Dicey
+                        diceRef={dice => this._reactDice = dice}
+                        onClick={isRolling ? () => null : () => this.setState({ isRolling: true, }, () => this._reactDice.rollAll())}
+                        rollDone={this._rollDone}
+                    />
                     <Counter
                         counts={counts}
                     />
@@ -132,7 +106,7 @@ class App extends PureComponent {
                     isOpen={isHelpModalOpen}
                     onClose={() => this.setState({ isHelpModalOpen: false, })}
                 />
-                <footer>
+                <footer className={'footer'}>
                     <p>{`\u00A9 ${new Date().getFullYear()} Mazen Chami`}</p>
                 </footer>
             </div>

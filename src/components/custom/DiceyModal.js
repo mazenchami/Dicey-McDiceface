@@ -23,7 +23,11 @@ class DiceyModal extends PureComponent {
     render = () => {
         const { bodyText, headerTitle, isOpen, onClose, } = this.props;
         return (
-            <Modal show={isOpen} onHide={onClose}>
+            <Modal
+                centered
+                onHide={onClose}
+                show={isOpen}
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>{headerTitle}</Modal.Title>
                 </Modal.Header>
