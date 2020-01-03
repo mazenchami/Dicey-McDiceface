@@ -7,3 +7,11 @@
     padding-bottom: 100px;
     padding-top: 100px;
 }
+
+@media only screen and (max-width: 768px) {
+    .dice-container {
+        flex: 2;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+}
