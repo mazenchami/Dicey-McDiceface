@@ -4,12 +4,8 @@
  * Game Description:
  * A six-sided die is rolled once every turn. The game will visually track how many of each number have been rolled, like how many 1s, 2s, etc. Once one specific number has been rolled 5 times, then that number is the winner, and the game is over. The user can then start the game over, and they can also reset the game at any point.
  *
- * Instructions
- * Create a website for the above game. The instructions are minimal, so it’s up to you to figure out a great user experience and also develop cleanly. When you’re done, upload your code to a GitHub repo with instructions on how to run locally.
- *
- * We’ll evaluate your solution based on functionality, user experience, code quality, and maintainability. Feel free to be creative in bringing this game to life.
- *
  */
+
 // import core React items
 import React, { PureComponent } from 'react';
 
