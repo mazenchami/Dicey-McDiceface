@@ -43,10 +43,12 @@
 
 .dice-container {
     align-items: stretch;
-}
-
-.count-container {
-    flex-direction: column;
+    background-color: #0a6c03;
+    border-radius: 12px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-bottom: 100px;
+    padding-top: 100px;
 }
 
 .padding-vert-20 {
@@ -54,55 +56,11 @@
     padding-top: 10px;
 }
 
-.modal {
-    background-color: rgba(0, 0, 0, 0.4);
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1050;
-    overflow: hidden;
-    outline: 0;
-    transition: -webkit-transform .3s ease-out;
-    -webkit-transition: -webkit-transform .3s ease-out;
-    transition: transform .3s ease-out;
-    transition: transform .3s ease-out,-webkit-transform .3s ease-out;
-}
-
-.winning-number-container {
-    background-color: #000;
-    border-radius: 12px;
-    text-align: center;
-    width: 25%;
-    margin: 20px auto;
-    padding-top: 10px;
-}
-
 .winning-number {
-    color: #fff;
     font-size: 10em;
     margin-block-start: 0em;
     margin-block-end: 0em;
-}
-
-.winning-number-p {
-    color: #fff;
-    font-size: 1.5em;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-}
-
-.test {
-    background-color: red;
-}
-
-.test2 {
-    background-color: blue;
-}
-
-.test3 {
-    background-color: green;
+    text-align: center;
 }
 
 @keyframes App-logo-spin {
