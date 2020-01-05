@@ -1,0 +1,8 @@
+.centered-modal-title .modal-title {
+    flex: 1;
+    text-align: center;
+}
+
+.modal {
+    z-index: 2000;
+}

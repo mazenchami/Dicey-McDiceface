@@ -2,7 +2,9 @@
  * Dicey McDiceface
  *
  * Game Description:
- * A six-sided die is rolled once every turn. The game will visually track how many of each number have been rolled, like how many 1s, 2s, etc. Once one specific number has been rolled 5 times, then that number is the winner, and the game is over. The user can then start the game over, and they can also reset the game at any point.
+ * A six-sided die is rolled once every turn. The game visually tracks how many times each number has been rolled.
+ * Once one specific number has been rolled 5 times, then that number is the winner, and the game is over.
+ * The user can then start the game over, and they can also reset the game at any point.
  *
  */
 
@@ -10,7 +12,8 @@
 import React, { PureComponent } from 'react';
 
 // import third part libraries
-import { Button, } from 'react-bootstrap';
+import _ from 'lodash';
+import { Button, Modal, Row, } from 'react-bootstrap';
 import { Fireworks, } from 'fireworks/lib/react';
 import { MdHelpOutline, } from 'react-icons/md';
 
@@ -18,7 +21,7 @@ import { MdHelpOutline, } from 'react-icons/md';
 import logic from './utils';
 
 // import components
-import { Counter, } from './components/Counter';
+import { Scoreboard, } from './components/Scoreboard';
 import { Dicey, } from './components/Dicey';
 import { DiceyModal, } from './components/custom';
 
@@ -29,25 +32,13 @@ class App extends PureComponent {
     constructor(props) {
         super(props);
         this.defaultState = {
-            counts: {
-                one:   0,
-                two:   0,
-                three: 0,
-                four:  0,
-                five:  0,
-                six:   0,
-            },
+            counts: logic.getCounters(),
             isHelpModalOpen: false,
             isRolling:       false,
             winningNumber:   null,
         };
         this.state = this.defaultState;
         this._reactDice = null;
-        this._timer = null;
-    }
-
-    componentWillUnmount = () => {
-        clearInterval(this._timer);
     }
 
     _resetGame = () => this.setState(this.defaultState)
@@ -65,43 +56,53 @@ class App extends PureComponent {
     render = () => {
         const { counts, isHelpModalOpen, isRolling, winningNumber, } = this.state;
         const fxProps = logic.returnFireworksProps();
+        const isResetBtnActive = !_.find(counts, (count, i) => count > 0);
         return (
             <div className={'App'}>
-                <div className={'row padding-vert-20'}>
+                <Row className={'header padding-vert-20'} id={'row'}>
                     <h1>{'Dicey McDiceface'}</h1>
-                    <MdHelpOutline
-                        color={'grey'}
-                        onClick={() => this.setState({ isHelpModalOpen: true, })}
-                        size={'2em'}
-                        style={{marginLeft: '20px',}}
-                    />
-                </div>
-                <div className={'row padding-vert-20'}>
-                    <Dicey
-                        diceRef={dice => this._reactDice = dice}
-                        onClick={isRolling ? () => null : () => this.setState({ isRolling: true, }, () => this._reactDice.rollAll())}
-                        rollDone={this._rollDone}
-                    />
-                    <Counter
-                        counts={counts}
-                    />
-                </div>
-                <div className={'padding-vert-20'}>
-                    <Button onClick={this._resetGame} variant={'warning'}>
-                        {'Reset Game'}
-                    </Button>
+                    <Row id={'header-icon-buttn-wrapper'}>
+                        <MdHelpOutline
+                            color={'grey'}
+                            onClick={() => this.setState({ isHelpModalOpen: true, })}
+                            size={'2em'}
+                            style={{marginRight: '20px',}}
+                        />
+                        <Button disabled={isResetBtnActive} onClick={this._resetGame} variant={'warning'}>
+                            {'New Game'}
+                        </Button>
+                    </Row>
+                </Row>
+                <div className={'main-container'}>
+                    <Row className={'padding-vert-20'}>
+                        <Dicey
+                            diceRef={dice => this._reactDice = dice}
+                            onClick={isRolling ? () => null : () => this.setState({ isRolling: true, }, () => this._reactDice.rollAll())}
+                            rollDone={this._rollDone}
+                        />
+                      <Scoreboard
+                            counts={counts}
+                            numberOfDots={logic.returnWinningRollNumber()}
+                        />
+                    </Row>
                 </div>
                 { winningNumber &&
                     <Fireworks {...fxProps} />
                 }
+                <Modal
+                    centered
+                    className={'winning-modal'}
+                    onHide={this._resetGame}
+                    show={winningNumber ? true : false}
+                >
+                    <h1>{'Winning Number'}</h1>
+                    <p className={'winning-number'}>{winningNumber}</p>
+                    <Button variant={'success'} onClick={this._resetGame}>
+                        {'Play Again'}
+                    </Button>
+                </Modal>
                 <DiceyModal
-                    bodyText={<p className={'winning-number'}>{winningNumber}</p>}
-                    headerTitle={'Winning Number'}
-                    isOpen={winningNumber ? true : false}
-                    onClose={this._resetGame}
-                />
-                <DiceyModal
-                    bodyText={'Click the dice to roll. Once one specific number has been rolled 5 times, then that number is the winner, and the game is over. Enjoy!'}
+                    bodyText={`Click the dice to roll. The Scoreboard will keep track of how many times a number has been rolled. First number to ${logic.returnWinningRollNumber()} wins!`}
                     headerTitle={'How To Play Dicey McDiceface'}
                     isOpen={isHelpModalOpen}
                     onClose={() => this.setState({ isHelpModalOpen: false, })}

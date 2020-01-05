@@ -1,4 +1,5 @@
 .App {
+    background: repeating-linear-gradient(#071a1e 0%, #274249) fixed;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -7,29 +8,22 @@
     text-align: center;
 }
 
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 40vmin;
-    pointer-events: none;
+.header {
+    align-items: center !important;
+    color: #ffffff;
+    justify-content: space-between !important;
+    margin-left: 20px !important;
+    margin-right: 10px !important;
+    padding-bottom: 0px !important;
 }
 
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+#header-icon-buttn-wrapper {
     align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    margin-left: 0px !important;
+    padding-right: 20px !important;
 }
 
-.App-link {
-    color: #61dafb;
-}
-
-.row {
-    display: flex;
+#row {
     align-items: center;
     flex-direction: row;
     justify-content: center;
@@ -47,6 +41,10 @@
     padding-top: 10px;
 }
 
+.padding-top-20 {
+    padding-top: 20px;
+}
+
 .winning-number {
     font-size: 10em;
     margin-block-start: 0em;
@@ -54,20 +52,30 @@
     text-align: center;
 }
 
-.footer {
+.main-container {
     display: flex;
-    align-items: center;
     flex: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.winning-modal .modal-content {
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+}
+
+.winning-modal .modal-content .btn {
+    align-self: center;
+    width: 25%;
+}
+
+.footer {
+    align-items: center;
+    color: #ffffff;
+    display: flex;
     flex-direction: column;
     justify-content: flex-end;
     padding-bottom: 20px;
-}
-
-@keyframes App-logo-spin {
-    from {
-       transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
 }

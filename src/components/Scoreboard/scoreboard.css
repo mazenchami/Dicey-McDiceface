@@ -1,0 +1,47 @@
+.count-container {
+    color: #ffffff;
+    flex-direction: column;
+}
+
+.count-container .row {
+    align-items: center;
+    justify-content: center;
+}
+
+.score-dice-wrapper {
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.dots-wrapper {
+
+}
+
+.empty-dot {
+    background-color: #ffffff;
+    border-color: #000000;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+    margin-right: 5px;
+    height: 10px;
+    width: 10px;
+}
+.empty-dot:last-child {
+    margin-right: 0px;
+}
+
+.empty-dot.active {
+    background-color: red;
+}
+
+@media only screen and (max-width: 768px) {
+    .score-dice-wrapper {
+        margin-right: 0px;
+        padding-left: 0px;
+    }
+    .dice {
+        padding-left: 1em;
+    }
+}

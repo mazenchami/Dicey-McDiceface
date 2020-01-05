@@ -3,6 +3,19 @@ import _ from 'lodash';
 
 const logic = {
 
+    // handles our counters state logic
+    // - src/App.js
+    getCounters: (one = 0, two = 0, three = 0, four = 0, five = 0, six = 0) => {
+        return {
+            one,
+            two,
+            three,
+            four,
+            five,
+            six,
+        };
+    },
+
     // handles our roll done logic
     // - src/App.js
     handleRollDoneLogic: (num, counts) => {
@@ -29,7 +42,7 @@ const logic = {
     }),
 
     // returns to winning number of rolls
-    // - src/App.js
+    // - src/App.js & src/components/Scoreboard/Scoreboard.js
     returnWinningRollNumber: () => 5,
 
     // returns numbers to words for better mapping
