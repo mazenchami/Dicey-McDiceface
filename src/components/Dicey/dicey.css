@@ -11,6 +11,10 @@
     padding-top: 100px;
 }
 
+.die {
+    cursor: pointer;
+}
+
 #tooltip .arrow::before {
     border-top-color: orange;
 }

@@ -13,7 +13,7 @@ import React, { PureComponent } from 'react';
 
 // import third part libraries
 import _ from 'lodash';
-import { Button, Modal, Row, } from 'react-bootstrap';
+import { Button, Modal, OverlayTrigger, Row, Tooltip, } from 'react-bootstrap';
 import { Fireworks, } from 'fireworks/lib/react';
 import { MdHelpOutline, } from 'react-icons/md';
 
@@ -66,11 +66,31 @@ class App extends PureComponent {
                             color={'grey'}
                             onClick={() => this.setState({ isHelpModalOpen: true, })}
                             size={'2em'}
-                            style={{marginRight: '20px',}}
+                            style={{marginRight: '20px', cursor: 'pointer',}}
                         />
-                        <Button disabled={isResetBtnActive} onClick={this._resetGame} variant={'warning'}>
-                            {'New Game'}
-                        </Button>
+                        { isResetBtnActive ?
+                            <OverlayTrigger
+                                overlay={<Tooltip id={'tooltip-disabled'}>{'Start game to reset'}</Tooltip>}
+                                placement={'bottom'}
+                            >
+                                <span className={'d-inline-block'}>
+                                    <Button
+                                        disabled={true}
+                                        style={{pointerEvents: 'none',}}
+                                        variant={'warning'}
+                                    >
+                                        {'New Game'}
+                                    </Button>
+                                </span>
+                            </OverlayTrigger>
+                            :
+                            <Button
+                                onClick={this._resetGame}
+                                variant={'warning'}
+                            >
+                                {'New Game'}
+                            </Button>
+                        }
                     </Row>
                 </Row>
                 <div className={'main-container'}>
@@ -80,7 +100,7 @@ class App extends PureComponent {
                             onClick={isRolling ? () => null : () => this.setState({ isRolling: true, }, () => this._reactDice.rollAll())}
                             rollDone={this._rollDone}
                         />
-                      <Scoreboard
+                        <Scoreboard
                             counts={counts}
                             numberOfDots={logic.returnWinningRollNumber()}
                         />
