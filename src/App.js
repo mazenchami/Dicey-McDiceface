@@ -110,6 +110,7 @@ class App extends PureComponent {
                     <Fireworks {...fxProps} />
                 }
                 <Modal
+                    backdrop={'static'}
                     centered
                     className={'winning-modal'}
                     onHide={this._resetGame}

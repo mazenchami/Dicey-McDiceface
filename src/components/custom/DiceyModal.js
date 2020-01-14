@@ -24,6 +24,7 @@ import './custom.css';
 class DiceyModal extends PureComponent {
     render = () => {
         const {
+            backdrop,
             bodyText,
             closeText,
             footerVariant,
@@ -35,6 +36,7 @@ class DiceyModal extends PureComponent {
         } = this.props;
         return (
             <Modal
+                backdrop={backdrop}
                 centered={modalCentered}
                 onHide={onClose}
                 show={isOpen}
@@ -56,7 +58,8 @@ class DiceyModal extends PureComponent {
 }
 
 DiceyModal.propTypes = {
-    bodyText:    PropTypes.oneOfType([
+    backdrop: PropTypes.string,
+    bodyText: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.element,
     ]).isRequired,
@@ -70,6 +73,7 @@ DiceyModal.propTypes = {
 };
 
 DiceyModal.defaultProps = {
+    backdrop:        'true',
     closeText:       'Close',
     footerVariant:   'secondary',
     modalCentered:   true,
