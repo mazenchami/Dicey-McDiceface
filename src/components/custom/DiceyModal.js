@@ -58,7 +58,10 @@ class DiceyModal extends PureComponent {
 }
 
 DiceyModal.propTypes = {
-    backdrop: PropTypes.string,
+    backdrop: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.bool,
+    ]),
     bodyText: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.element,
@@ -73,7 +76,7 @@ DiceyModal.propTypes = {
 };
 
 DiceyModal.defaultProps = {
-    backdrop:        'true',
+    backdrop:        true,
     closeText:       'Close',
     footerVariant:   'secondary',
     modalCentered:   true,
