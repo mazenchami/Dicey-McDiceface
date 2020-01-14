@@ -32,7 +32,7 @@ class App extends PureComponent {
     constructor(props) {
         super(props);
         this.defaultState = {
-            counts: logic.getCounters(),
+            counts:          logic.getCounters(),
             isHelpModalOpen: false,
             isRolling:       false,
             winningNumber:   null,
