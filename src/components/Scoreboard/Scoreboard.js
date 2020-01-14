@@ -17,6 +17,9 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Col, Row, } from 'react-bootstrap';
 
+// import utils
+import logic from '../../utils';
+
 // css import files
 import './scoreboard.css';
 
@@ -34,40 +37,19 @@ const ScoreItem = ({ activeItems, number, numberOfDots, }) => (
 class Scoreboard extends PureComponent {
     render = () => {
         const { counts, numberOfDots, } = this.props;
+        const numberOfFaces = logic.returnNumberOfFaces();
         return (
             <div className={'center-content count-container'}>
                 <h3>{'Scoreboard'}</h3>
                 <Row>
-                    <ScoreItem
-                        activeItems={counts.one}
-                        number={1}
-                        numberOfDots={numberOfDots}
-                    />
-                    <ScoreItem
-                        activeItems={counts.two}
-                        number={2}
-                        numberOfDots={numberOfDots}
-                    />
-                    <ScoreItem
-                        activeItems={counts.three}
-                        number={3}
-                        numberOfDots={numberOfDots}
-                    />
-                    <ScoreItem
-                        activeItems={counts.four}
-                        number={4}
-                        numberOfDots={numberOfDots}
-                    />
-                    <ScoreItem
-                        activeItems={counts.five}
-                        number={5}
-                        numberOfDots={numberOfDots}
-                    />
-                    <ScoreItem
-                        activeItems={counts.six}
-                        number={6}
-                        numberOfDots={numberOfDots}
-                    />
+                    {_.map(_.range(1, (numberOfFaces + 1)), index =>
+                        <ScoreItem
+                            activeItems={counts[logic.returnNumbersToWords()[index]]}
+                            key={index}
+                            number={index}
+                            numberOfDots={numberOfDots}
+                        />
+                    )}
                 </Row>
             </div>
         );

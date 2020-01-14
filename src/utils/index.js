@@ -57,6 +57,10 @@ const logic = {
         'six',
     ]),
 
+    // returns the number of faces our die has
+    // - src/components/Scoreboard/Scoreboard.js
+    returnNumberOfFaces: () => 6,
+
 };
 
 /* Export ==================================================================== */

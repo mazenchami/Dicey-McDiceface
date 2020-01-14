@@ -5,6 +5,10 @@ test('Confirms our winning roll number is 5', () => {
     expect(logic.returnWinningRollNumber()).toEqual(5);
 });
 
+test('Confirms our dice face number is 6', () => {
+    expect(logic.returnNumberOfFaces()).toEqual(6);
+});
+
 test('Confirms our number to works function works as expected', () => {
     let expectedResult = [
         '',
