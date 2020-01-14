@@ -79,3 +79,10 @@
     justify-content: flex-end;
     padding-bottom: 20px;
 }
+
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 1.75rem;
+        margin-bottom: 0px;
+    }
+}
