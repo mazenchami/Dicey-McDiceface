@@ -10,6 +10,8 @@ Three options will be available:<br /><br />
 [1] initialize project<br />
 [2] start packager<br />
 [3] run unit tests<br /><br />
+[4] start Storybook.js<br /><br />
+[5] build Storybook.js<br /><br />
 run [1] then [2] to get project up and running<br />
 [3] is always available to run unit test ([1] will show a failed message if the unit tests fails)
 

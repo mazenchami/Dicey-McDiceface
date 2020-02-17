@@ -34,6 +34,9 @@ const ScoreItem = ({ activeItems, number, numberOfDots, }) => (
     </Col>
 );
 
+/**
+ * Handles the scoring element of the game.
+ */
 class Scoreboard extends PureComponent {
     render = () => {
         const { counts, numberOfDots, } = this.props;

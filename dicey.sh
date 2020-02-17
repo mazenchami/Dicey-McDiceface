@@ -27,9 +27,17 @@ unitTests() {
     yarn test
 }
 
+startStorybook() {
+  yarn storybook
+}
+
+buildStorybook() {
+  yarn build-storybook
+}
+
 main() {
     echo
-    read -p "${grey}Choose what you want to do:${normal}`echo $'\n\n '`[1]: initialize project`echo $'\n '`[2]: start packager`echo $'\n '`[3]: run unit tests`echo $'\n '`${standout}Enter selection:${normal} " -n 1 -r
+    read -p "${grey}Choose what you want to do:${normal}`echo $'\n\n '`[1]: initialize project`echo $'\n '`[2]: start packager`echo $'\n '`[3]: run unit tests`echo $'\n '`[4]: start Storybook.js`echo $'\n '`[5]: build Storybook.js`echo $'\n '`${standout}Enter selection:${normal} " -n 1 -r
     echo
     case "$REPLY" in
         1)
@@ -40,6 +48,12 @@ main() {
             ;;
         3)
             unitTests
+            ;;
+        4)
+            startStorybook
+            ;;
+        5)
+            buildStorybook
             ;;
         *)
             echo "${red}Invalid selection${normal}"
